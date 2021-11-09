@@ -12,15 +12,6 @@ const getBlobDuration = require('get-blob-duration')
 let badges;
 let leftIcons;
 let pingFPSdiv = null;
-let mediaRecorder = null;
-let filepath = '';
-let starttime;
-let pausetime;
-let pause;
-let totalPause = 0;
-let recordedChunks = [];
-let recording = false;
-let paused = false;
 let chatFocus = false;
 let chatState = true;
 let chatForce = true;
@@ -244,13 +235,10 @@ function createBalloon(text, error = false) {
 window.addEventListener('keydown', function(event) {
     switch (event.key) {
         case 'F1':
-            startRecording();
             break;
         case 'F2':
-            stopRecording(true);
             break;
         case 'F3':
-            stopRecording(false);
             break;
     }
 });
@@ -334,174 +322,6 @@ window.addEventListener('load', () => {
         }
     }, 750)
 });
-
-async function configMR() {
-    let clientWindow = remote.getCurrentWindow().getMediaSourceId();
-    const constraints = {
-        audio: {
-            mandatory: {
-                chromeMediaSource: 'desktop',
-                chromeMediaSourceId: clientWindow,
-            }
-        },
-        video: {
-            mandatory: {
-                chromeMediaSource: 'desktop',
-                chromeMediaSourceId: clientWindow,
-                minWidth: 1280,
-                maxWidth: 1920,
-                minHeight: 720,
-                maxHeight: 1080,
-                minFrameRate: 60
-            }
-        }
-    };
-    const options = {
-        videoBitsPerSecond: 3000000,
-        mimeType: 'video/webm; codecs=vp9'
-    };
-    let mediaRecorder;
-    return new Promise((resolve, reject) => {
-        navigator.mediaDevices.getUserMedia(constraints)
-            .then(stream => {
-                mediaRecorder = new MediaRecorder(stream, options);
-                console.log("mR", mediaRecorder);
-                mediaRecorder.ondataavailable = handleDataAvailable;
-                mediaRecorder.onstop = handleStop;
-                mediaRecorder.onstart = () => { console.log("started recording");
-                    recording = true };
-                mediaRecorder.onpause = () => { paused = true };
-                mediaRecorder.onresume = () => { paused = false };
-                resolve(mediaRecorder);
-            })
-            .catch(err => {
-                console.error("getUserMedia failed with error: ", err);
-                reject(err);
-            });
-    })
-}
-
-function handleDataAvailable(e) {
-    recordedChunks.push(e.data);
-}
-
-async function handleStop(e) {
-    recording = false;
-    if (starttime === undefined) return;
-    const blob = new Blob(recordedChunks, {
-        type: 'video/mp4;'
-    });
-    console.log("handeling stop. starttime:", starttime, "Date.now():", Date.now(), "pause:", totalPause, "duration", Date.now() - starttime - totalPause)
-    fixwebm(blob, Date.now() - starttime - totalPause, saveRecording)
-}
-
-function startRecording() {
-    if (mediaRecorder === null) {
-        console.log('First Time: Configuring mR');
-        configMR()
-            .then((rs) => {
-                console.log('Configurated!', rs);
-                mediaRecorder = rs;
-                startrec();
-            })
-            .catch((err) => {
-                console.error(err);
-            })
-    } else {
-        if (recording) {
-            if (paused) {
-                resumeRecording()
-            } else {
-                pauseRecording()
-            }
-        } else {
-            startrec()
-        }
-    }
-}
-
-function pauseRecording() {
-    console.log("mR is paused!")
-    pausetime = Date.now() - starttime - totalPause
-    try {
-        mediaRecorder.pause();
-        createBalloon("Recording Paused!")
-    } catch (e) {
-        console.error(e)
-    }
-    pause = Date.now();
-}
-
-function resumeRecording() {
-    console.log("mR is resumed!")
-    try {
-        mediaRecorder.resume();
-        createBalloon("Recording Resumed!")
-    } catch (e) {
-        console.error(e)
-    }
-    totalPause += Date.now() - pause;
-}
-let shouldSave = false;
-
-function stopRecording(save) {
-    if (!recording) {
-        createBalloon('No recording in progress!', true)
-        return;
-    }
-    if (mediaRecorder === undefined || mediaRecorder === null) return;
-    if (save) {
-        let folderPath = path.join(logDir, 'videos');
-        console.log(folderPath);
-        if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath);
-        filepath = path.join(folderPath, `kirka-${Date.now()}.mp4`);
-    }
-    shouldSave = save;
-    try {
-        if (paused) {
-            mediaRecorder.resume();
-        }
-        mediaRecorder.stop();
-    } catch (e) {
-        console.error(e)
-    }
-}
-
-async function startrec() {
-    console.log("mR state:", mediaRecorder.state);
-    recordedChunks = [];
-    try {
-        mediaRecorder.start(500);
-    } catch (e) {
-        console.error(e)
-    }
-    createBalloon("Recording started!")
-    starttime = Date.now();
-    pause = 0;
-    totalPause = 0;
-    console.log("New mR state:", mediaRecorder.state);
-}
-
-function saveRecording(blob) {
-    console.log("In saveRecording")
-    getBlobDuration.default(blob).then(function(duration) {
-        console.log(duration + ' seconds');
-        if (isNaN(parseFloat(duration))) {
-            console.error("Broken duration detected, attempting fix...")
-            fixwebm(blob, 300000, saveRecording);
-            return;
-        } else {
-            blob.arrayBuffer().then(buf => {
-                const buffer = Buffer.from(buf)
-                console.log("Filepath:", filepath)
-                if (filepath !== '') fs.writeFileSync(filepath, buffer);
-                if (shouldSave) createBalloon("Recording Saved!");
-                else createBalloon('Recording Cancelled', true);
-                console.log('Saved!');
-            })
-        }
-    })
-}
 
 function genChatMsg(text) {
     console.log(text);

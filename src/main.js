@@ -5,7 +5,6 @@ const { app, protocol, BrowserWindow, screen, clipboard, dialog, shell, globalSh
 const electronLocalshortcut = require("electron-localshortcut");
 const Store = require("electron-store");
 const config = new Store();
-const { autoUpdate } = require('./features/autoUpdate');
 const fs = require('fs');
 const consts = require('./features/const');
 const url = require('url');
@@ -18,6 +17,8 @@ if (config.get('disableFrameRateLimit', false)) {
 }
 app.commandLine.appendSwitch('disable-gpu-vsync');
 app.commandLine.appendSwitch('ignore-gpu-blacklist');
+app.commandLine.appendSwitch('--allow-file-access-from-files');
+app.commandLine.appendSwitch('allow-file-access-from-files');
 app.commandLine.appendSwitch('disable-breakpad');
 app.commandLine.appendSwitch('disable-print-preview');
 app.commandLine.appendSwitch('disable-metrics');
@@ -53,6 +54,7 @@ function createWindow() {
         webPreferences: {
             nodeIntergation: true,
             preload: gamePreload,
+            webSecurity: false,
             enableRemoteModule: true
         },
     });
@@ -181,24 +183,10 @@ function createSplashWindow() {
         }
     });
     splash.loadFile(`${__dirname}/splash/splash.html`);
-
-    autoUpdate(splash.webContents).then((didUpdate) => {
-        if (didUpdate) {
-            let options = {
-                buttons: ["Ok"],
-                message: "Update Complete! Please relaunch the client."
-            }
-            dialog.showMessageBox(options)
-                .then(() => {
-                    app.quit();
-                })
-        } else {
-            const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-            createWindow();
-            wait(10000).then(() => {
-                canDestroy = true;
-            });
-        }
+    const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+    createWindow();
+    wait(10).then(() => {
+        canDestroy = true;
     });
 }
 
