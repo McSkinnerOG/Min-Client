@@ -1,0 +1,39 @@
+{
+  "name": "kirkaclient",
+  "version": "2.2.1",
+  "description": "KirkaClient",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder build"
+  },
+  "build": {
+    "files": "!**/release-builds/*"
+  },
+  "author": "AwesomeSam",
+  "license": "ISC",
+  "dependencies": {
+    "discord-rich-presence": "0.0.8",
+    "electron-localshortcut": "^3.2.1",
+    "electron-prompt": "^1.6.2",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^8.0.0",
+    "follow-redirects": "^1.14.1",
+    "get-blob-duration": "^1.2.0",
+    "node-fetch": "^2.6.5",
+    "v8-compile-cache": "^2.3.0",
+    "yarn": "^1.22.17"
+  },
+  "devDependencies": {
+    "electron-builder": "22.10.5",
+    "electron": "9.4.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AwesomeSam9523/kirkaclient.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AwesomeSam9523/kirkaclient/issues"
+  },
+  "homepage": "https://github.com/AwesomeSam9523/kirkaclient#readme"
+}

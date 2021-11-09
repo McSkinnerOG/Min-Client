@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+    <title>Kirka | About Us</title>
+   <style>
+   body {
+   background-color: #3b4975;
+   	font-family: "somefont";
+    display: inline-block !important;
+   }
+   
+@font-face {
+            font-family: "somefont";
+            src: url("../fonts/arlrdbd.ttf");
+        }
+		
+table, th, td {
+    border: 2px solid black;
+    padding: 5px;
+  }
+  
+   nav {
+	 position: absolute;
+	 top: 10px;
+	 left: 50%;
+	 transform: translateX(-50%);
+	 display: inline-block;
+	 border: 2px solid #00f5e9;
+	 box-shadow: 0 0 12px #00f5e9;
+	 border-radius: 20px;
+	 width: 600px;
+	 animation: slide-in 1s ease-out;
+}
+ ul {
+	 position: relative;
+	 display: flex;
+	 flex: 1 1 auto;
+	 margin: 0;
+	 padding: 0 30px;
+	 list-style-type: none;
+}
+ ul li:not(:last-child) {
+	 margin-right: 100px;
+	 margin-left: 100px;
+}
+ ul li {
+	 border-radius: 500px;
+	 padding: 10px;
+	 transition: background 0.2s;
+}
+ ul li a {
+	 color: #00f5e9;
+	 font-family: "somefont";
+	 text-decoration: none;
+	 text-transform: uppercase;
+	 transition: color 0.2s;
+}
+ ul li ul {
+	 visibility: hidden;
+	 opacity: 0;
+	 position: absolute;
+	 display: block;
+	 margin: 120px -1200px;
+	 padding: 0;
+	 border-right: 20px solid #f89329;
+	 border-bottom: 2px solid #f89329;
+	 border-radius: 5px;
+	 transition: opacity 0.2s, visibility 0.2s;
+}
+
+ ul li:hover {
+	 background-color: #00f5e9;
+     box-shadow: 0 0 12px #00f5e9;
+  	 color: #000000;
+}
+ ul li:hover a {
+	   	 color: #000000;
+
+}
+ ul li:hover ul {
+	 visibility: visible;
+	 opacity: 1;
+	 box-shadow: 0px 3px 5px 2px #ebecf1;
+}
+
+ @keyframes slide-in {
+	 0% {
+		 top: -50px;
+	}
+	 40% {
+		 top: 20px;
+	}
+	 70% {
+		 top: 10px;
+	}
+	 100% {
+		 top: 15px;
+	}
+}
+
+.about-wrapper{
+    height: 190vh;
+	    padding: 170px 16px;
+
+}
+
+.about-right{
+    padding: 70px 16px;
+    background: #3b4975;
+    height: 240vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5rem;
+    text-align: center;
+    color:#fff
+}
+.about-right h1{
+    font-size: 5rem;
+    text-transform: uppercase;
+}
+.about-right h1 span{
+    color: #B721FF;
+}
+.about-right h2{
+    font-weight: 600;
+}
+.about-btns{
+    display: flex;
+    margin: 2rem 0;
+}
+.btn{
+    border: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 0.55rem 0;
+    width: 130px;
+    font-weight: 600;
+    background: transparent;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    color:#fff
+}
+.btn.btn-pink{
+    background: #B721FF;
+    color: #fff;
+    border-color: #B721FF;
+    transition: all 0.5s ease-in-out;
+}
+.btn.btn-pink:hover{
+    background: transparent;
+    border-color: #fff;
+    color: #fff;
+}
+.btn.btn-white{
+    transition: all 0.5s ease-in-out;
+}
+.btn.btn-white:hover{
+    background: #B721FF;
+    border-color: #B721FF;
+    color: #fff;
+}
+.about-para p{
+    font-weight: 300;
+    padding: 0.5rem;
+    opacity: 0.8;
+}
+
+@media screen and (min-width: 992px){
+    .about-wrapper{
+        display: grid;
+        grid-template-columns: repeat(2, 2fr);
+    }
+
+    .about-left{
+        position: relative;
+    }
+    .about-left-content{
+        position: absolute;
+        width:80%
+    
+    }
+img {
+    text-align: left;
+    display: inline;
+}
+
+}
+
+
+   </style>
+   <body>
+   
+   <nav>
+  <ul>
+    <li><a href="settings.html">Settings</a></li>
+    <li><a href="#about">About Us</a></li>
+  </ul>
+</nav>
+        <div class = "about-wrapper">
+        <div class = "about-right">
+		<h1>Hello Users<span>!</span></h1>
+        <h2>Welcome to Kirka Client</h2>
+        <div class = "about-btns">
+            <button type = "button" onClick="window.open('https://discord.gg/bD9JNv6GFS');" class = "btn btn-pink">Support Server</button>
+        </div>
+
+        <div class = "about-para">
+        <table style="width:100%">
+            <tr>
+                <td style="border: 0px;" colspan="2">
+                    <label style="font-size: 20px;">● Client Badges ●</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <img src="https://media.discordapp.net/attachments/874979720683470859/875401710405820436/dev.png"
+                    width="100%" height="auto" alt="Developers">
+                </td>
+                <td>
+                    <label style="position: relative;
+                    justify-content: center;
+                    margin: auto;
+                    text-align: center;">Developers</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <img src="https://media.discordapp.net/attachments/874979720683470859/875401743394033684/contributor.png"
+                    width="100%" height="auto" alt="contributor">
+                </td>
+                <td>
+                    <label style="position: relative;
+                    justify-content: center;
+                    margin: auto;
+                    text-align: center;">Contributor</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <img src="https://media.discordapp.net/attachments/874979720683470859/875401778827522098/staff.png"
+                    width="100%" height="auto" alt="KirkaHub Staff">
+                </td>
+                <td>
+                    <label style="position: relative;
+                    justify-content: center;
+                    margin: auto;
+                    text-align: center;">KirkaHub Staff</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <img src="https://media.discordapp.net/attachments/874979720683470859/875401812646174740/gfx.PNG"
+                    width="100%" height="auto" alt="GFX Artist">
+                </td>
+                <td>
+                    <label style="position: relative;
+                    justify-content: center;
+                    margin: auto;
+                    text-align: center;">GFX Artist</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <img src="https://media.discordapp.net/attachments/874979720683470859/888703118118907924/kirkadev.PNG"
+                    width="100%" height="auto" alt="Kirka.io Developer">
+                </td>
+                <td>
+                    <label style="position: relative;
+                    justify-content: center;
+                    margin: auto;
+                    text-align: center;">Kirka.io Developer</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <img src="https://media.discordapp.net/attachments/874979720683470859/888703150628941834/vip.PNG"
+                    width="100%" height="auto" alt="VIP">
+                </td>
+                <td>
+                    <label style="position: relative;
+                    justify-content: center;
+                    margin: auto;
+                    text-align: center;">V.I.P.</label>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <table style="width:100%">
+            <tr>
+                <td style="border: 0px;" colspan="2">
+                    <label style="font-size: 20px;">● Shortcut Keys ●</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <label>F1</label>
+                </td>
+                <td>
+                    <label style="text-align: center;">Start/Pause Recording</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <label>F2</label>
+                </td>
+                <td>
+                    <label style="text-align: center;">End Recording</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <label>F3</label>
+                </td>
+                <td>
+                    <label style="text-align: center;">Cancel Recording</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <label>F4</label>
+                </td>
+                <td>
+                    <label style="text-align: center;">Copy Game URL</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <label>F5</label>
+                </td>
+                <td>
+                    <label style="text-align: center;">Reload Page</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <label>F6</label>
+                </td>
+                <td>
+                    <label style="text-align: center;">Join Game from a URL</label>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 10%;">
+                    <label>F11</label>
+                </td>
+                <td>
+                    <label style="text-align: center;">Toggle Fullscreen Mode</label>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <table style="width:100%">
+            <tr>
+                <td style="border: 0px;" colspan="2">
+                    <label style="font-size: 20px;">● Developers ●</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="text-align: center;">AwesomeSam#7985</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="text-align: center;">Debelox#7000</label>
+                </td>
+            </tr>
+        </table>
+        <br>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+  </body>
+</html>

@@ -1,0 +1,10 @@
+release-builds/
+node_modules/
+.vs/
+data/
+*.bat
+resources/
+*.txt
+dist/
+*.yml
+*.asar

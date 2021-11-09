@@ -1,0 +1,130 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KirkaClient</title>
+    <script> const { ipcRenderer } = require('electron'); </script>
+    <style>
+	
+	        video {
+  	        object-fit: cover;
+  	        width: 100vw;
+  	        height: 100vh;
+  	        position: fixed;
+  	        top: 0;
+  	        left: 0;
+		border-radius: 10px;
+		overflow: hidden !important;
+	        }
+			
+	    body {
+            pointer-events: none;
+            text-align: center;
+            z-index: 1;
+
+            background-size: certain;
+            background-repeat: no-repeat; 
+            overflow: hidden;
+
+            border: 6px solid rgba(0, 0, 0, 0.479);
+            border-radius: 6px;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: 0;
+        }
+        .c {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+        }
+        @font-face {
+            font-family: "somefont";
+            src: url("../fonts/arlrdbd.ttf");
+        }
+        .bottomT {
+            position: absolute;
+            bottom: 10;
+            color: #fff;
+            outline: none;
+            font-family: "somefont";
+            font-size: 20px;
+            user-select: none;
+            text-shadow:
+                -1px -1px 0 #202020,
+                1px -1px 0 #202020,
+                -1px 1px 0 #202020,
+                1px 1px 0 #202020,
+                -2px -2px 0 #202020,
+                2px -2px 0 #202020,
+                -2px 2px 0 #202020,
+                2px 2px 0 #202020;
+        }
+
+        .tips {
+            top: 20%;
+            color: #fff;
+            outline: none;
+            font-family: "somefont";
+            font-size: 18px;
+            text-align: center;
+            user-select: none;
+            text-shadow:
+                -1px -1px 0 #202020,
+                1px -1px 0 #202020,
+                -1px 1px 0 #202020,
+                1px 1px 0 #202020,
+                -2px -2px 0 #202020,
+                2px -2px 0 #202020,
+                -2px 2px 0 #202020,
+                2px 2px 0 #202020;
+        }
+
+        .name {
+            position: absolute;
+            bottom: 9;
+            color: #fff;
+            outline: none;
+            font-family: "somefont";
+            font-size: 25px;
+            user-select: none;
+            text-shadow:
+                -1px -1px 0 #202020,
+                1px -1px 0 #202020,
+                -1px 1px 0 #202020,
+                1px 1px 0 #202020,
+                -2px -2px 0 #202020,
+                2px -2px 0 #202020,
+                -2px 2px 0 #202020,
+                2px 2px 0 #202020;
+        }
+
+        #kirkalogo {
+            width: 75%;
+            height: 95%;
+            background-image: url("https://media.discordapp.net/attachments/807276551862616114/874243256643358730/kirkalogo.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -28%)
+        }
+    </style>
+</head>
+<body>
+    <video loop id="myVideo">
+      <source src="https://cdn.discordapp.com/attachments/807276551862616114/893431626372120606/My_Video3.mp4" type="video/mp4" playbackRate=1/> 
+    </video>
+    <div class="c">
+        <div class="tips" id="tips"></div>
+        <div class="name" style="right: 7;" id="version">KirkaClient</div>
+        <div class="bottomT" style="left: 7;" id="status">Kirka Client</div>
+        <div id="kirkalogo"></div>
+    </div>
+</body>
+</html>
